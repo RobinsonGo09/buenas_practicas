@@ -10,35 +10,7 @@ function handleNumber(numStr) {
   updateScreen();
 }
 
-function handleSymbol(symbol) {
-  switch (symbol) {
-    case 'C':
-      buffer = "0"; memoria = 0; ultimo_operador = null;
-      break;
-    case '=':
-      if (ultimo_operador == null) { return; }
-      flushOperationAndLog(parseInt(buffer));
-      ultimo_operador = null;
-      buffer = "" + memoria;
-      memoria = 0;
-      break;
-    case '+': case '-': case '*': case '/':
-      handleMath(symbol);
-      break;
-    case 'sin': case 'cos': case 'tan':
-      if (buffer == "0") return;
-      var cientifico_result;
-      var val = parseFloat(buffer);
-      if (symbol == 'sin') { cientifico_result = Math.sin(val); }
-      else if (symbol == 'cos') { cientifico_result = Math.cos(val); }
-      else if (symbol == 'tan') { cientifico_result = Math.tan(val); }
-      buffer = "" + cientifico_result;
-      var logEntry = symbol + "(" + val + ") = " + cientifico_result;
-      logHistory(logEntry);
-      break;
-  }
-  updateScreen();
-}
+
 
 function handleMath(symbol) {
   if (buffer == '0' && memoria == 0) { return; }
